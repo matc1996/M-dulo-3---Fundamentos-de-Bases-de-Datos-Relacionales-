@@ -86,18 +86,18 @@ VALUES (1, 1, 2, 1, 500, '2024-04-10'),
 /*Creacion de consultas.*/
 
 /*obtener el nombre de la moneda elegida por un usuario especifico*/
-select m.nombre_moneda, t.fecha_transaccion
+select u.nombre as Nombre, m.nombre_moneda as Moneda, t.fecha_transaccion as Fecha_Transaccion
 from transaccion t
-inner join moneda m on t.moneda_id = m.id_moneda
-where t.id_usuario_remitente = 4;	
+inner join moneda m on t.moneda_id = m.id_moneda inner join usuario u on u.id_usuario = t.id_usuario_remitente
+where u.id_usuario = 8;		
 
 /*obtener todas las transacciones registradas*/
 select * from transaccion;
 
 /*obtener todas las transacciones realizadas por un usuario especifico*/
-select * 
-from transaccion
-where id_usuario_remitente = 2; 
+select u.nombre as Nombre_Usuario, t.*   
+from transaccion t inner join usuario u on t.id_usuario_remitente = u.id_usuario
+where u.nombre = 'María López'; /* Tambien se podria obtener por el id del usuario remitente: where id_usuario_remitente = 2;*/
 
 /*modificar el campo correo electronico de un usuario especifico*/
 update Usuario set correo_electronico = 'nuevo_correo@example.com'
